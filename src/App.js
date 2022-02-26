@@ -1,25 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import "./styles.css";
+import {Song} from './songs'
+import { useState } from "react";
 
-function App() {
-  return (
+export default function App() {
+const [filterName, setFilterName] = useState(false)
+const [filterDuration, setFilterDuration] = useState(false)
+
+const handleChange = (e) => {
+  let value = e.target.value
+  console.log(value)
+  if(value === 'name') {
+    setFilterName(true);
+  } else {setFilterName(false);}
+  if(value === 'duration') {
+    setFilterDuration(true);
+  } else {setFilterDuration(false)}
+}
+return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <select onChange={handleChange}>
+          <option>All</option>
+          <option value='name'>Name</option>
+          <option value='duration'>Duration</option>
+        </select>
+      </div>
+      {(filterName && Song) ? 
+      <>
+      {
+        Song.map(song => 
+        <h3>{song.name}</h3>
+        )}
+      </> 
+      : 
+      (filterDuration && Song) ? 
+        <>
+        {
+          Song.map(song => 
+          <h3>{song.duration}</h3>
+          )}
+        </> 
+        :
+      Song.map((song,i) => 
+        <div key={i}>
+          <h3>{song.name}</h3>
+          <p>{song.duration}</p>
+        </div> 
+         )
+      }
+
+      
+   
+    
     </div>
   );
 }
-
-export default App;
