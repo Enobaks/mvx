@@ -83,16 +83,7 @@ export default function App() {
           ))}
         </>
       )
-      : ascending ?  (
-        Song.sort((a,b) => a.name > b.name ? 1 : -1;
-        return a.duration > b.duration
-          ).map((song, i) => (
-          <div key={i}>
-            <h3>{song.name}</h3>
-            <p>Duration: {song.duration}</p>
-          </div>
-        ))
-      ) 
+  
       :
       (
         Song.map((song, i) => (
